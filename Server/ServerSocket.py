@@ -4,7 +4,7 @@ import threading
 
 class ServerSocket:
 
-    #def __init__(self):
+    def __init__(self):
         #create TCP/IP socket
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         #get server hostname
@@ -19,13 +19,12 @@ class ServerSocket:
         server_adress = (ip_adress , 8765)
         print("starting up on %s port %s" % server_adress)
         sock.bind(server_adress)
-
         #listen for one incoming connection at a time
         sock.listen(1)
+        
+        run_server_forever()
 
-    #   run_server_forever()
-
-    #def run_server_forever():
+    def run_server_forever():
 
         #wait for a connection
         print("waiting for a connection")
@@ -44,6 +43,8 @@ class ServerSocket:
                     #no more data -- quit the loop
                     print("no more data.")
                     break
+        except:
+            print("ERROR")
         finally:
             #cloean up the connection
             connection.close()
