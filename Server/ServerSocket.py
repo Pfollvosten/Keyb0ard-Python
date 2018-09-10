@@ -21,7 +21,7 @@ class ServerSocket(threading.Thread):
         print("starting up on %s port %s" % server_adress)
         sock.bind(server_adress)
 
-        
+    def __run__(self):
         #listen for one incoming connection at a time
         sock.listen(1)
         #wait for a connection

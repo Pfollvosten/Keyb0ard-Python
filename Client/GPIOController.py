@@ -1,6 +1,7 @@
 from gpiozero import Button
 import threading
 from time import sleep
+from MainClient import client_sock
 
 class GPIOController(threading.Thread):
     
@@ -28,7 +29,11 @@ class GPIOController(threading.Thread):
 
     def read_input_forever(self):
         while True:
+            sleep(0.01)
             for x in self.buttons:
                 if x.ispressed:
                     print("pressed ", x.pin)
-                    ClientSocket.client_sock.send_data(self.pressed_data)
+                    pressed_data[x] = True
+                    client_sock.send_data(self.pressed_data)
+                elif x.isreleased:
+                    pressed_data[x] = False
