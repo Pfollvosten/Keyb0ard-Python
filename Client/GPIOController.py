@@ -1,14 +1,19 @@
 from gpiozero import Button
 import threading
 from time import sleep
-import ClientSocket
 
-class GPIOController:
+class GPIOController(threading.Thread):
     
-
-    pressed_data = [
-        #false , false , false , false , false , false , false , false
-    ]
+    pressed_data = {
+        1: False,
+        2: False,
+        3: False,
+        4: False,
+        5: False,
+        6: False,
+        7: False,
+        8: False
+    }
 
     buttons = [
         Button(26),
@@ -26,4 +31,4 @@ class GPIOController:
             for x in self.buttons:
                 if x.ispressed:
                     print("pressed ", x.pin)
-                    ClientSocket.send_data(pressed_data)
+                    ClientSocket.client_sock.send_data(self.pressed_data)
