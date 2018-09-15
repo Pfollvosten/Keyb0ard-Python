@@ -26,6 +26,3 @@ class GUI(threading.Thread):
         ]
 
         app.display()
-
-
-GUI()

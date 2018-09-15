@@ -10,17 +10,15 @@ class ClientSocket(threading.Thread):
         # get the according IP address "192.168.178.28"
         self.ip_address = ip
         # bind the socket to the port, and connect
-        self.server_address = (self.ip_address, port)  
+        self.server_address = (self.ip_address, port)
+
+        self.send_data("YEEET")
 
     def send_data(self, data):
         try:
             self.sock.connect(self.server_address)
             print ("connecting to %s" % (self.ip_address))
-
-            for entry in data:
-                print("data: %s" % entry)
-                new_data = str(entry).encode("utf-8")
-                self.sock.sendall(new_data)
+            self.sock.send(data)
         except:
             print("ERROR")
         finally:

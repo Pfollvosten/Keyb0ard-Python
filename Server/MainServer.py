@@ -1,7 +1,7 @@
-import KeybaordController
+# import KeybaordController
 import ServerSocket
-import GUI
+# import GUI
 
 
-key_controller = KeybaordController.KeyboardController()
+# key_controller = KeybaordController.KeyboardController()
 server_sock = ServerSocket.ServerSocket(8187)

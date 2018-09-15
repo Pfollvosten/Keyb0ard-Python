@@ -1,5 +1,4 @@
 import socket
-import KeybaordController
 import threading
 import time
 
@@ -7,7 +6,7 @@ class ServerSocket(threading.Thread):
 
     def __init__(self, port):
         #create TCP/IP socket
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         #get server hostname
         local_hostname = socket.gethostname()
         #get fully qualified hostname
@@ -19,21 +18,23 @@ class ServerSocket(threading.Thread):
         #bind the socket to port
         server_adress = (ip_adress , port)
         print("starting up on %s port %s" % server_adress)
-        sock.bind(server_adress)
+        self.sock.bind(server_adress)
+    
+        self.run_server()
 
-    def __run__(self):
+    def run_server(self):    
         #listen for one incoming connection at a time
-        sock.listen(1)
+        self.sock.listen(1)
         #wait for a connection
         print("waiting for a connection")
 
         try:
-            connection , client_adress = sock.accept()
+            connection , client_adress = self.sock.accept()
             #show who connected
             print("connection from ", client_adress)
             #recv the data in small chunks and print it
             while True:
-                data = sock.recv(1024)
+                data = self.sock.recv(1024)
                 if data:
                     #output recv data
                     print("DATA: %s" % data)
