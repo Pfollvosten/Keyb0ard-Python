@@ -1,3 +1,5 @@
+# ClientSocket.py
+
 import socket, pickle, threading
 
 class ClientSocket(threading.Thread):
