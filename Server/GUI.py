@@ -1,15 +1,15 @@
 import threading
 from guizero import App, PushButton
-import time
-from MainServer import key_controller
-
 
 class GUI(threading.Thread):
 
     def map_key(self, keynumber):
-        self.buttons[keynumber-1].bg = "red"
-        self.buttons[keynumber-1].text = "yeet"
-        key_controller.read_key_input(keynumber)
+        from MainServer import keyboard as key_controller
+        
+        self.buttons[keynumber].bg = "red"
+        self.buttons[keynumber].text = "recording"
+        parsed_comb = key_controller.read_key_input(keynumber)
+        self.buttons[keynumber].text =parsed_comb
 
     def __init__(self):
         app = App(title="Keypad example", width=200, height=90, layout="grid")

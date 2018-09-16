@@ -1,25 +1,20 @@
-import socket
-import time
-import threading
+import socket, pickle, threading
 
 class ClientSocket(threading.Thread):
 
-    def __init__(self, port, ip):
-        # create TCP/IP socket
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        # get the according IP address "192.168.178.28"
-        self.ip_address = ip
-        # bind the socket to the port, and connect
-        self.server_address = (self.ip_address, port)
-
-        self.send_data("YEEET")
+    HOST = '192.168.178.28'
+    PORT = 50007
 
     def send_data(self, data):
         try:
-            self.sock.connect(self.server_address)
-            print ("connecting to %s" % (self.ip_address))
-            self.sock.send(data)
+            # Create a socket connection.
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((self.HOST, self.PORT))
+            # Pickle the object and send it to the server
+            data_string = pickle.dumps(data)
+            s.send(data_string)
         except:
-            print("ERROR")
+            print("Error")
         finally:
-            self.sock.close()
+            s.close()
+            print ('Data Sent to Server')

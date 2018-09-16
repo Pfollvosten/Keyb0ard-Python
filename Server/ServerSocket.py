@@ -1,49 +1,31 @@
-import socket
-import threading
-import time
+import socket, pickle, threading
 
 class ServerSocket(threading.Thread):
 
-    def __init__(self, port):
-        #create TCP/IP socket
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        #get server hostname
-        local_hostname = socket.gethostname()
-        #get fully qualified hostname
-        local_fqdn = socket.getfqdn()
-        #get the according IP adress
-        ip_adress = socket.gethostbyname(local_hostname)
-        #output setup message
-        print("working on %s (%s) with %s" % (local_hostname, local_fqdn , ip_adress))
-        #bind the socket to port
-        server_adress = (ip_adress , port)
-        print("starting up on %s port %s" % server_adress)
-        self.sock.bind(server_adress)
-    
-        self.run_server()
+    HOST = '192.168.178.28'
+    PORT = 50007
 
-    def run_server(self):    
-        #listen for one incoming connection at a time
-        self.sock.listen(1)
-        #wait for a connection
-        print("waiting for a connection")
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.bind((HOST, PORT))
+        print("Server setup!")
+        while True:
+            s.listen(1)
+            conn, addr = s.accept()
+            print ('Connected by', addr)
+            #receive the data and unpickle it
+            data = conn.recv(4096)
+            data_variable = pickle.loads(data)
+            print ('Data received from client')
+            read_data()
+    except:
+        print("Error")    
+    finally:
+        conn.close()
 
-        try:
-            connection , client_adress = self.sock.accept()
-            #show who connected
-            print("connection from ", client_adress)
-            #recv the data in small chunks and print it
-            while True:
-                data = self.sock.recv(1024)
-                if data:
-                    #output recv data
-                    print("DATA: %s" % data)
-                else:
-                    #no more data -- quit the loop
-                    print("no more data.")
-                    break
-        except:
-            print("ERROR")
-        finally:
-            #cloean up the connection
-            connection.close()
+    def read_data(self, data):
+        from MainServer import keyboard as key_controller
+        
+        for id in range(data.len()):
+            if data[id]:
+                key_controller.create_key_stroke(id)
