@@ -9,6 +9,8 @@ class KeyboardController(threading.Thread):
     
     button_map = [list()] * 8
 
+    threading.Thread()
+
     def read_key_input(self, button_id):
         """
         records all keystrokes done until the user presses escape.

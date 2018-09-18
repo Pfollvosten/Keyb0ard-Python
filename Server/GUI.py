@@ -1,9 +1,9 @@
 # GUI.py
 
-import threading
 from guizero import App, PushButton
+from threading import Thread
 
-class GUI(threading.Thread):
+class GUI:
 
     def map_key(self, keynumber):
         from MainServer import keyboard as key_controller
@@ -13,7 +13,7 @@ class GUI(threading.Thread):
         parsed_comb = key_controller.read_key_input(keynumber)
         self.buttons[keynumber].text =parsed_comb
 
-    def __init__(self):
+    def run(self):
         app = App(title="Keypad example", width=200, height=90, layout="grid")
 
         self.buttons = [
@@ -26,5 +26,5 @@ class GUI(threading.Thread):
             PushButton(app, command=self.map_key, args=[6], text="7", grid=[2, 1]),
             PushButton(app, command=self.map_key, args=[7], text="8", grid=[3, 1])
         ]
-
         app.display()
+        print("GUI set up!")
