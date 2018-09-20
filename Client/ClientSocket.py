@@ -20,7 +20,7 @@ class ClientSocket(Thread):
 
             self.sock.connect((self.HOST, self.PORT))
             while True:
-                sleep(0.05)
+                sleep(1)
                 data = gpio.read_keys()
                 data_bin = pickle.dumps(data)
                 self.sock.send(data_bin)
