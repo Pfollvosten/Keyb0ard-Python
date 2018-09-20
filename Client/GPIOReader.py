@@ -20,44 +20,14 @@ class GPIOReader(Thread):
         ]
 
     def run(self):
-        sleep(0.01)
         while True:
+            sleep(0.01)     # Scanning 100 times/s for input
+            # scanning every button 
             for but in range(len(self.buttons)):
                 if self.buttons[but].is_pressed:
                     self.pressed[but] = True
-                    
+                    print("pressed button: " , but)
                     from MainClient import sock
-                    sock.send_data(self.pressed_data)
                 else:
                     self.pressed[but] = False
-
-        # valid = None    # Tastenposition
-        # invalid = 0     # Anzahl der invalid Tasten
-        # cnt = 0         # for-Zaehler
-        # state = 0       # Status
-        # while True:
-        #     invalid = 0
-        #     cnt = 0
-        #     for x in buttons:
-        #         # Vier Zustaende pruefen
-        #         if state == 0:
-        #             print("state 0")
-        #         # state 0 Keine Taste gedrueckt
-        #         if x.is_pressed:
-        #             # Taste gedrueckt, das ist die valid Taste
-        #             valid = x.pin
-        #             state = 1
-        #         elif state == 1:
-        #             print("state 1")
-        #         # state 1 EINE valid-Taste gedrueckt, keine invalid Taste gedrueckt
-        #         if x.is_pressed and x.pin == valid and invalid == 0:
-        #             # valid gedrueckt, kein invalid, unveraendert
-        #             state = 1
-        #         elif not x.is_pressed and x.pin == valid and invalid == 0:
-        #             # valid losgelssen, kein invalid
-        #             valid = None
-        #             state = 0
-        #         elif x.is_pressed and x.pin != valid:
-        #             # valid immer noch gedrueckt (abernicht diese Taste), plus invalid
-        #             invalid = invalid + 1
-        #             state = 2
+            # sock.send_data(self.pressed_data)

@@ -9,10 +9,6 @@ class ServerSocket(Thread):
     PORT = 50007
 
     def run(self):
-        Thread.daemon = True
-        Thread.start(self)
-
-
         try:
             # create socket object
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -30,8 +26,9 @@ class ServerSocket(Thread):
                 # Analyze the pressed keys and trigger according keys
                 self.read_data(data_variable)
         except:
-            print("Error")
+            print("Server Error")
         finally:
+            print("Server shutdown")
             conn.close()
 
     def read_data(self, data):

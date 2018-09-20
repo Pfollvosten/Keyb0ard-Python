@@ -30,4 +30,7 @@ class KeyboardController(threading.Thread):
         print("TBI")
 
     def write_btnmap(self):
+        """
+        write button assignments from var self.button_map to btnmap.json
+        """
         print("TBI")
