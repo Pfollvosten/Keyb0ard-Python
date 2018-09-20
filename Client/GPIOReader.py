@@ -1,27 +1,61 @@
 # GPIOReader.py
 
 from threading import Thread
-from MainClient import client_sock
+from MainClient import sock
 from gpiozero import Buttons
+from time import sleep
 
-class GPIOReader(threading.Thread):
-    
-    pressed_data = {
-        1: False,
-        2: False,
-        3: False,
-        4: False,
-        5: False,
-        6: False,
-        7: False,
-        8: False
-    }
+class GPIOReader(Thread):
 
-    buttons = [Buttons(16) * 8]
+    def __init__(self):
+        self.pressed = [False] * 8
 
-    client_sock.send_data(pressed_data)
+        self.buttons = [
+            Button(26),
+            Button(19),
+            Button(13),
+            Button(6),
+            Button(21),
+            Button(20),
+            Button(16),
+            Button(12)
+        ]
 
     def run(self):
-        for but in range(self.buttons.len):
-            if self.buttons[but].ispressed:
-                self.pressed_data[but] = True
+        sleep(0.01)
+        while True:
+            for but in range(self.buttons.__len__()):
+                if self.buttons[but].ispressed:
+                    self.pressed[but] = True
+                    sock.send_data(self.pressed_data)
+
+        # valid = None    # Tastenposition
+        # invalid = 0     # Anzahl der invalid Tasten
+        # cnt = 0         # for-Zaehler
+        # state = 0       # Status
+        # while True:
+        #     invalid = 0
+        #     cnt = 0
+        #     for x in buttons:
+        #         # Vier Zustaende pruefen
+        #         if state == 0:
+        #             print("state 0")
+        #         # state 0 Keine Taste gedrueckt
+        #         if x.is_pressed:
+        #             # Taste gedrueckt, das ist die valid Taste
+        #             valid = x.pin
+        #             state = 1
+        #         elif state == 1:
+        #             print("state 1")
+        #         # state 1 EINE valid-Taste gedrueckt, keine invalid Taste gedrueckt
+        #         if x.is_pressed and x.pin == valid and invalid == 0:
+        #             # valid gedrueckt, kein invalid, unveraendert
+        #             state = 1
+        #         elif not x.is_pressed and x.pin == valid and invalid == 0:
+        #             # valid losgelssen, kein invalid
+        #             valid = None
+        #             state = 0
+        #         elif x.is_pressed and x.pin != valid:
+        #             # valid immer noch gedrueckt (abernicht diese Taste), plus invalid
+        #             invalid = invalid + 1
+        #             state = 2

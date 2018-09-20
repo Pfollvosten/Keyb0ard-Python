@@ -9,8 +9,6 @@ class KeyboardController(threading.Thread):
     
     button_map = [list()] * 8
 
-    threading.Thread()
-
     def read_key_input(self, button_id):
         """
         records all keystrokes done until the user presses escape.
@@ -26,6 +24,9 @@ class KeyboardController(threading.Thread):
         keyboard.play(self.button_map[button_id], speed_factor=0)
 
     def read_btnmap(self):
+        """
+        read button assignments from btnmap.json and assign it to var self.button_map (list)*8
+        """
         print("TBI")
 
     def write_btnmap(self):

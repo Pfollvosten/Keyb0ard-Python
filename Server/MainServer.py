@@ -1,2 +1,12 @@
 # MainServer.py
 
+from ServerSocket import ServerSocket
+t_sock = ServerSocket()
+t_sock.start()
+
+from GUI import GUI
+t_gui = GUI()
+t_gui.start()
+
+from KeyboardController import KeyboardController
+keyboard = KeyboardController()

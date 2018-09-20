@@ -1,8 +1,8 @@
 # ClientSocket.py
 
-import socket, pickle, threading
+import socket, pickle
 
-class ClientSocket(threading.Thread):
+class ClientSocket:
 
     HOST = '192.168.178.28'
     PORT = 50007

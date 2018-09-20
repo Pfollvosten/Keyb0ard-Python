@@ -3,7 +3,7 @@
 from guizero import App, PushButton
 from threading import Thread
 
-class GUI:
+class GUI(Thread):
 
     def map_key(self, keynumber):
         from MainServer import keyboard as key_controller
