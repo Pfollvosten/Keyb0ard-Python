@@ -17,12 +17,13 @@ class ServerSocket(Thread):
             while True:
                 # listen for and accept 1 incoming connection
                 s.listen()
+                print("Waiting for connection...")
                 conn, addr = s.accept()
                 print ('Connected by', addr)
                 #receive the data and unpickle it
                 data_binary = conn.recv(4096)
                 data_variable = pickle.loads(data_binary)
-                print ('Data received from client. Data is: ', data_variable)
+                print ('Data received from client. Data is: \n', data_variable)
                 
                 # self.read_data(data_variable)
         except:
