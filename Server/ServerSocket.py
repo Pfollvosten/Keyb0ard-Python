@@ -23,6 +23,7 @@ class ServerSocket(Thread):
                 data_binary = conn.recv(4096)
                 data_variable = pickle.loads(data_binary)
                 print ('Data received from client. Data is: ', data_variable)
+                
                 # self.read_data(data_variable)
         except:
             print("Server Error")

@@ -22,7 +22,7 @@ class GPIOReader(Thread):
     def run(self):
         from MainClient import sock
         while True:
-            sleep(0.05)     # Scanning 20 times/s for input
+            sleep(1)     # Scanning 1 times/s for input
             # scanning every button 
             for but in range(len(self.buttons)):
                 if self.buttons[but].is_pressed:
@@ -30,4 +30,5 @@ class GPIOReader(Thread):
                     print("pressed button: " , but)
                 else:
                     self.pressed[but] = False
+                    
             sock.send_data(self.pressed)
