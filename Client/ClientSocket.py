@@ -1,8 +1,10 @@
 # ClientSocket.py
 
 import socket, pickle
+from threading import Thread
+from time import sleep
 
-class ClientSocket:
+class ClientSocket(Thread):
 
     HOST = '192.168.178.28'
     PORT = 50007
@@ -10,15 +12,19 @@ class ClientSocket:
     def __init__(self):
         # Create a socket connection.
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        
-    def send_data(self, data):
+
+    def run(self):
         try:
+            from MainClient import gpio
+
             self.sock.connect((self.HOST, self.PORT))
-            # Pickle the object and send it to the server
-            data_string = pickle.dumps(data)
-            self.sock.send(data_string)
+            while True:
+                sleep(0.05)
+                data = gpio.read_keys()
+                data_bin = pickle.dumps(data)
+                self.sock.send(data_bin)
+                print("Data sent to Server")
         except:
-            print("Error")
+            print("client")
         finally:
             self.sock.close()
-            print ('Data Sent to Server')

@@ -16,7 +16,7 @@ class ServerSocket(Thread):
             print("Server setup!")
             while True:
                 # listen for and accept 1 incoming connection
-                s.listen(1)
+                s.listen()
                 conn, addr = s.accept()
                 print ('Connected by', addr)
                 #receive the data and unpickle it

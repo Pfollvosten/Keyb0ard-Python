@@ -1,10 +1,9 @@
 # GPIOReader.py
 
-from threading import Thread
 from gpiozero import Button
 from time import sleep
 
-class GPIOReader(Thread):
+class GPIOReader:
 
     pressed = [False] * 8
 
@@ -19,16 +18,14 @@ class GPIOReader(Thread):
         Button(12)
         ]
 
-    def run(self):
-        from MainClient import sock
-        while True:
-            sleep(1)     # Scanning 1 times/s for input
-            # scanning every button 
-            for but in range(len(self.buttons)):
-                if self.buttons[but].is_pressed:
-                    self.pressed[but] = True
-                    print("pressed button: " , but)
-                else:
-                    self.pressed[but] = False
-                    
-            sock.send_data(self.pressed)
+    def read_keys(self):
+        """
+        scanning every button if pressed. Gets called from ClientSocket.run
+        """
+        for but in range(len(self.buttons)):
+            if self.buttons[but].is_pressed:
+                self.pressed[but] = True
+                print("pressed button: " , but)
+            else:
+                self.pressed[but] = False
+        return self.pressed
