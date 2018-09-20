@@ -12,6 +12,7 @@ class ClientSocket(Thread):
     def __init__(self):
         # Create a socket connection.
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        super(ClientSocket, self).__init__()
 
     def run(self):
         try:
