@@ -30,4 +30,4 @@ class GPIOReader(Thread):
                     print("pressed button: " , but)
                 else:
                     self.pressed[but] = False
-            sock.send_data(self.pressed_data)
+            sock.send_data(self.pressed)
