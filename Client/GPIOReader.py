@@ -6,18 +6,17 @@ from time import sleep
 
 class GPIOReader(Thread):
 
-    def __init__(self):
-        self.pressed = [False] * 8
+    pressed = [False] * 8
 
-        self.buttons = [
-            Button(26),
-            Button(19),
-            Button(13),
-            Button(6),
-            Button(21),
-            Button(20),
-            Button(16),
-            Button(12)
+    buttons = [
+        Button(26),
+        Button(19),
+        Button(13),
+        Button(6),
+        Button(21),
+        Button(20),
+        Button(16),
+        Button(12)
         ]
 
     def run(self):
