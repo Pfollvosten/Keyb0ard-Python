@@ -1,7 +1,6 @@
 # GPIOReader.py
 
 from threading import Thread
-from MainClient import sock
 from gpiozero import Buttons
 from time import sleep
 
@@ -27,7 +26,11 @@ class GPIOReader(Thread):
             for but in range(self.buttons.__len__()):
                 if self.buttons[but].ispressed:
                     self.pressed[but] = True
+                    
+                    from MainClient import sock
                     sock.send_data(self.pressed_data)
+                else:
+                    self.pressed[but] = False
 
         # valid = None    # Tastenposition
         # invalid = 0     # Anzahl der invalid Tasten
