@@ -2,8 +2,7 @@
 
 import keyboard
 import threading
-import json
-from time import sleep
+# import json
 
 class KeyboardController(threading.Thread):
     

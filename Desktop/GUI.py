@@ -6,12 +6,16 @@ from threading import Thread
 class GUI(Thread):
 
     def map_key(self, keynumber):
-        from MainServer import keyboard as key_controller
+        try:
+            from MainServer import key_controller
+        except:
+            print("Error importing key_controller")
+        finally:    
+            self.buttons[keynumber].bg = "red"
+            self.buttons[keynumber].text = "recording"
+            parsed_comb = key_controller.read_key_input(keynumber)
+            self.buttons[keynumber].text =parsed_comb
         
-        self.buttons[keynumber].bg = "red"
-        self.buttons[keynumber].text = "recording"
-        parsed_comb = key_controller.read_key_input(keynumber)
-        self.buttons[keynumber].text =parsed_comb
 
     def run(self):
         app = App(title="Keypad example", width=200, height=90, layout="grid")
