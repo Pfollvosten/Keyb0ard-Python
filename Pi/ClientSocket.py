@@ -16,13 +16,13 @@ class ClientSocket(Thread):
 
     def run(self):
         try:
-            from MainClient import gpio
+            from GPIOReader import read_keys
 
             self.sock.connect((self.HOST, self.PORT))
             while True:
                 # read and send pickled data every second
                 sleep(1)
-                data = gpio.read_keys()
+                data = read_keys()
                 data_bin = pickle.dumps(data)
                 self.sock.send(data_bin)
                 print("Data sent")
