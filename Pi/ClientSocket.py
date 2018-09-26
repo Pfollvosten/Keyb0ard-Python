@@ -6,7 +6,7 @@ from time import sleep
 
 class ClientSocket(Thread):
 
-    HOST = '192.168.178.28'
+    HOST = '192.168.178.22'
     PORT = 50007
 
     def __init__(self):
