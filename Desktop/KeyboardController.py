@@ -1,35 +1,47 @@
 # KeyboardController.py
 
+### import and setup
+import json
 import keyboard
-import threading
-# import json
+from blinkstick import blinkstick
+led = blinkstick.find_first()
+from yeelight import Bulb
+bulb = Bulb("192.68.178.40")
+from threading import Thread
 
-class KeyboardController(threading.Thread):
-    
-    button_map = [list()] * 8
 
-    def read_key_input(self, button_id):
-        """
-        records all keystrokes done until the user presses escape.
-        """
-        hotkey = keyboard.record(until='escape', suppress=False, trigger_on_release=False)
-        self.button_map[button_id] = hotkey
-        return "TBI"
+def execute_key(btn_id):
+    """
+    execute previously saved keystroke recordings
+    """
+    with open('btnmap.json', encoding='utf-8') as file:
+        data = json.load(file)
+        key_data = data["btnmap"][btn_id]
+        
+        # Keyboard
+        if key_data["key_comb"]:
+            key = Thread(target=keyboard_exec , args=(key_data["key_comb"],))
+            key.start()
+        # # Yeelight
+        # if key_data["yeelight"]:
+        #     key = Thread(target=yeelight_exec , args=(key_data["yeelight"],))
+        #     key.start()
+        # #Blinkstick
+        if key_data["blinkstick"]:
+            key = Thread(target=blinkstick_exec , args=(key_data["blinkstick"],))
+            key.start()
+        
+        file.close()
 
-    def create_key_stroke(self, button_id):
-        """
-        execute previously saved keystroke recordings
-        """
-        keyboard.play(self.button_map[button_id], speed_factor=0)
 
-    def read_btnmap(self):
-        """
-        read button assignments from btnmap.json and assign it to var self.button_map (list)*8
-        """
-        print("TBI")
+def keyboard_exec(key_comb):
+    keyboard.send(key_comb)
 
-    def write_btnmap(self):
-        """
-        write button assignments from var self.button_map to btnmap.json
-        """
-        print("TBI")
+def yeelight_exec(yee):
+    bulb.turn_on()
+
+def blinkstick_exec(blk):
+    if blk["action"] == "pulse":
+        led.pulse(red=blk["color"][0], green=blk["color"][1], blue=blk["color"][2])
+    elif blk["action"] == "blink":
+        pass

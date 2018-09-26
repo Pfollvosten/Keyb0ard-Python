@@ -1,42 +1,54 @@
 {
     "btnmap": [
         {
-            "key_comb": [],
+            "key_comb": "a",
+            "blinkstick": {
+                "action" : "pulse",
+                "color" : [0, 255, 255, 100]
+            },
+            "yeelight": {}
+        },
+        {
+            "key_comb": "d",
+            "blinkstick": {
+                "action" : "pulse",
+                "color" : [255, 0, 255, 100]
+            },
+            "yeelight": {}
+        },
+        {
+            "key_comb": "",
             "blinkstick": {},
             "yeelight": {}
         },
         {
-            "key_comb": [],
+            "key_comb": "",
             "blinkstick": {},
             "yeelight": {}
         },
         {
-            "key_comb": [],
+            "key_comb": "s",
+            "blinkstick": {
+                "action" : "pulse",
+                "color" : [0, 0, 255, 100]
+            },
+            "yeelight": {}
+        },
+        {
+            "key_comb": "w",
+            "blinkstick": {
+                "action" : "pulse",
+                "color" : [255, 0, 0, 100]
+            },
+            "yeelight": {}
+        },
+        {
+            "key_comb": "",
             "blinkstick": {},
             "yeelight": {}
         },
         {
-            "key_comb": [],
-            "blinkstick": {},
-            "yeelight": {}
-        },
-        {
-            "key_comb": [],
-            "blinkstick": {},
-            "yeelight": {}
-        },
-        {
-            "key_comb": [],
-            "blinkstick": {},
-            "yeelight": {}
-        },
-        {
-            "key_comb": [],
-            "blinkstick": {},
-            "yeelight": {}
-        },
-        {
-            "key_comb": [],
+            "key_comb": "",
             "blinkstick": {},
             "yeelight": {}
         }

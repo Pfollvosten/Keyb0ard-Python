@@ -27,20 +27,13 @@ class ServerSocket(Thread):
                 data_binary = conn.recv(1024)
                 data_variable = pickle.loads(data_binary)
                 print ('Data received from client. Data is: \n', data_variable)
-                
-                self.read_data(data_variable)
+                # analyze and execute
+                for id in range(len(data_variable)):
+                    if data_variable[id]:
+                        from KeyboardController import execute_key
+                        execute_key(id)
         except:
             print("Server Error")
         finally:
             print("Server shutdown")
             conn.close()
-
-    def read_data(self, data):
-        """
-        Analyze the pressed keys and trigger according keys
-        """
-        from MainServer import key_controller
-        
-        for id in range(len(data)):
-            if data[id]:
-                key_controller.create_key_stroke(id)

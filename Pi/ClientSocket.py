@@ -25,7 +25,7 @@ class ClientSocket(Thread):
                 data = gpio.read_keys()
                 data_bin = pickle.dumps(data)
                 self.sock.send(data_bin)
-                print("Data sent to Server")
+                print("Data sent")
         except:
             print("client")
         finally:
