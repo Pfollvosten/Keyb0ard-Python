@@ -2,18 +2,12 @@
     "btnmap": [
         {
             "key_comb": "a",
-            "blinkstick": {
-                "action" : "pulse",
-                "color" : [0, 255, 255, 100]
-            },
+            "blinkstick": {},
             "yeelight": {}
         },
         {
             "key_comb": "d",
-            "blinkstick": {
-                "action" : "pulse",
-                "color" : [255, 0, 255, 100]
-            },
+            "blinkstick": {},
             "yeelight": {}
         },
         {
