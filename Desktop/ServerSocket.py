@@ -5,7 +5,7 @@ from threading import Thread
 
 class ServerSocket(Thread):
 
-    HOST = '192.168.178.22'
+    HOST = '192.168.178.28'
     PORT = 50007
 
     def __init__(self):

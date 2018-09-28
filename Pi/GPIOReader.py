@@ -23,7 +23,7 @@ buttons = [
 #     ticks_since += 1 if blocked else ticks_since = 0
 
 #     for but in range(len(buttons)):
-#         if buttons[but].is_pressed and not blocked:
+#         if buttons[but].is_pressed:
 #             blocked = True
 #             print("pressed button: " , but)
 #             if ticks_since <= 250:

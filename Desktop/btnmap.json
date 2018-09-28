@@ -18,7 +18,10 @@
         {
             "key_comb": "",
             "blinkstick": {},
-            "yeelight": {}
+            "yeelight": {
+                "action" : "color",
+                "color" : [20 , 255 , 20 , 100]
+            }
         },
         {
             "key_comb": "s",

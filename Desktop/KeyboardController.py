@@ -3,10 +3,10 @@
 ### import and setup
 import json
 import keyboard
-# from blinkstick import blinkstick
-# led = blinkstick.find_first()
-# from yeelight import Bulb
-# bulb = Bulb("192.68.178.40")
+from blinkstick import blinkstick
+led = blinkstick.find_first()
+from yeelight import Bulb
+bulb = Bulb("192.68.178.40")
 from threading import Thread
 
 
@@ -23,13 +23,13 @@ def execute_key(btn_id):
             key = Thread(target=keyboard_exec , args=(key_data["key_comb"],))
             key.start()
         # # Yeelight
-        # if key_data["yeelight"]:
-        #     key = Thread(target=yeelight_exec , args=(key_data["yeelight"],))
-        #     key.start()
-        # #Blinkstick
-        # if key_data["blinkstick"]:
-        #     key = Thread(target=blinkstick_exec , args=(key_data["blinkstick"],))
-        #     key.start()
+        if key_data["yeelight"]:
+            key = Thread(target=yeelight_exec , args=(key_data["yeelight"],))
+            key.start()
+        #Blinkstick
+        if key_data["blinkstick"]:
+            key = Thread(target=blinkstick_exec , args=(key_data["blinkstick"],))
+            key.start()
         
         file.close()
 
@@ -41,8 +41,8 @@ def yeelight_exec(yee):
     # bulb.turn_on()
     pass
 
-# def blinkstick_exec(blk):
-#     if blk["action"] == "pulse":
-#         led.pulse(red=blk["color"][0], green=blk["color"][1], blue=blk["color"][2])
-#     elif blk["action"] == "blink":
-#         pass
+def blinkstick_exec(blk):
+    if blk["action"] == "pulse":
+        led.pulse(red=blk["color"][0], green=blk["color"][1], blue=blk["color"][2])
+    elif blk["action"] == "pulse":
+        led.set_color(red=blk["color"][0], green=blk["color"][1], blue=blk["color"][2])
