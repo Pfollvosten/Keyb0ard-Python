@@ -16,7 +16,7 @@ def read_keys():
     """
     scanning every button if pressed. Gets called from ClientSocket.run()
     """
-    ret = []
+    ret = [False] * 8
     for but in range(len(buttons)):
         with buttons[but] as b:
             # send out 1 stroke then block it for 300ms
@@ -30,7 +30,7 @@ def read_keys():
             elif b[0].is_released:
                 b[1] = False
                 b[2] = 0
-            ret.append(b[1])
+            ret[but] = b[1]
     return ret
     # return list([b[1] for b in buttons])
     
