@@ -30,7 +30,7 @@ def read_keys():
                 b[1] = False
                 b[2] = 0
 
-    return list([b[2] for b in buttons])
+    return list([b[1] for b in buttons])
     
 # def read_keys():
 #     """
