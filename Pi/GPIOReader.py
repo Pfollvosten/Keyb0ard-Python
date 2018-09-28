@@ -12,6 +12,8 @@ buttons = [
     [Button(12), False, 0]
 ]
 
+pressed = [False] * 8
+
 # def read_keys():
 #     """
 #     scanning every button if pressed. Gets called from ClientSocket.run()
