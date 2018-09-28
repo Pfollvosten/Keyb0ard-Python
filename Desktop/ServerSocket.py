@@ -26,7 +26,7 @@ class ServerSocket(Thread):
                 #receive the data and unpickle it
                 data_binary = conn.recv(1024)
                 data_variable = pickle.loads(data_binary)
-                print ('Data received from client. Data is: \n', data_variable)
+                # print ('Data received from client. Data is: \n', data_variable)
                 # analyze and execute
                 for id in range(len(data_variable)):
                     if data_variable[id]:

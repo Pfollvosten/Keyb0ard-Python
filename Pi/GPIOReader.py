@@ -1,52 +1,45 @@
 # GPIOReader.py
 
 from gpiozero import Button
-
-pressed = [False] * 8
-blocked = False
-ticks_since = 0
 buttons = [
-    Button(26),
-    Button(19),
-    Button(13),
-    Button(6),
-    Button(21),
-    Button(20),
-    Button(16),
-    Button(12)
+    [Button(26), False, 0],
+    [Button(19), False, 0],
+    [Button(13), False, 0],
+    [Button(6),  False, 0],
+    [Button(21), False, 0],
+    [Button(20), False, 0],
+    [Button(16), False, 0],
+    [Button(12), False, 0]
 ]
 
+def read_keys():
+    """
+    scanning every button if pressed. Gets called from ClientSocket.run()
+    """
+    for but in range(len(buttons)):
+        with buttons[but] as b:
+            # send out 1 stroke then block it for 300ms
+            if b[2] == 0:
+                b[1] = True
+            elif b[1]:
+                b[1] = False
+                b[2] += 1
+                if b[2] >= 30:
+                    b[1] = True
+            elif b[0].is_released:
+                b[1] = False
+                b[2] = 0
+
+    return list([b[2] for b in buttons])
+    
 # def read_keys():
 #     """
 #     scanning every button if pressed. Gets called from ClientSocket.run
 #     """
-#     ticks_since += 1 if blocked else ticks_since = 0
-
 #     for but in range(len(buttons)):
 #         if buttons[but].is_pressed:
-#             blocked = True
+#             pressed[but] = True
 #             print("pressed button: " , but)
-#             if ticks_since <= 250:
-#                 blocked = True
-#                 pressed[but] = True
-#             if ticks_since >= 250 and ticks_since%50==0:
-#                 pass
-            
-#         elif buttons[but].is_released:
+#         else:
 #             pressed[but] = False
-#             blocked = False
 #     return pressed
-
-
-
-def read_keys():
-    """
-    scanning every button if pressed. Gets called from ClientSocket.run
-    """
-    for but in range(len(buttons)):
-        if buttons[but].is_pressed:
-            pressed[but] = True
-            print("pressed button: " , but)
-        else:
-            pressed[but] = False
-    return pressed
