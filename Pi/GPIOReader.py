@@ -17,9 +17,12 @@ def read_keys():
     scanning every button if pressed. Gets called from ClientSocket.run()
     """
     for but in range(len(buttons)):
+        print("for problem")
         with buttons[but] as b:
+            print("with problem")
             # send out 1 stroke then block it for 300ms
             if b[0].is_pressed:
+                print("pressed problem")
                 if b[2] == 0:
                     b[1] = True
                 elif b[1]:
