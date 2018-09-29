@@ -16,34 +16,19 @@ def read_keys():
     """
     scanning every button if pressed. Gets called from ClientSocket.run()
     """
-    # ret = []
-    # for but in range(len(buttons)):
-    #     with buttons[but] as b:
-    #         # send out 1 stroke then block it for 300ms
-    #         if b[2] == 0:
-    #             b[1] = True
-    #         elif b[1]:
-    #             b[1] = False
-    #             b[2] += 1
-    #             if b[2] >= 30:
-    #                 b[1] = True
-    #         elif b[0].is_released:
-    #             b[1] = False
-    #             b[2] = 0
-    #         ret.append(b[1])
-    # ret = list(ret)
-    # print(ret)
-    return list([False] * 8)#ret
-    # return list([b[1] for b in buttons])
-    
-# def read_keys():
-#     """
-#     scanning every button if pressed. Gets called from ClientSocket.run
-#     """
-#     for but in range(len(buttons)):
-#         if buttons[but].is_pressed:
-#             pressed[but] = True
-#             print("pressed button: " , but)
-#         else:
-#             pressed[but] = False
-#     return pressed
+    for but in range(len(buttons)):
+        with buttons[but] as b:
+            # send out 1 stroke then block it for 300ms
+            if b[0].is_pressed:
+                if b[2] == 0:
+                    b[1] = True
+                elif b[1]:
+                    b[1] = False
+                    b[2] += 1
+                    if b[2] >= 30:
+                        b[1] = True
+            elif b[0].is_released:
+                b[1] = False
+                b[2] = 0
+    # return pressed state for every button as a list            
+    return list([bu[1] for bu in buttons])
