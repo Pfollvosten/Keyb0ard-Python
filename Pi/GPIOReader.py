@@ -20,7 +20,9 @@ def read_keys():
         # with buttons[but] as b:
         b = buttons[but]
         # send out 1 stroke then block it for 300ms
+        print("got into for")
         if b[0].is_pressed:
+            print("pressed")
             if b[2] == 0:
                 b[1] = True
             elif b[1]:
@@ -29,6 +31,7 @@ def read_keys():
                 if b[2] >= 30:
                     b[1] = True
         elif b[0].is_released:
+            print("released")
             b[1] = False
             b[2] = 0
     # return pressed state for every button as a list            

@@ -21,7 +21,7 @@ class ClientSocket(Thread):
             self.sock.connect((self.HOST, self.PORT))
             while True:
                 # read and send pickled data every second
-                sleep(0.01)
+                sleep(0.1)
                 data = read_keys()
                 data_bin = pickle.dumps(data)
                 self.sock.send(data_bin)
