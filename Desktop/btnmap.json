@@ -1,6 +1,5 @@
 {
-    "btnmap": [
-        {
+    "btnmap": [{
             "key_comb": "a",
             "blinkstick": {},
             "yeelight": {}
@@ -19,23 +18,23 @@
             "key_comb": "",
             "blinkstick": {},
             "yeelight": {
-                "action" : "color",
-                "color" : [20 , 255 , 20 , 100]
+                "action": "color",
+                "color": [20, 255, 20, 100]
             }
         },
         {
             "key_comb": "s",
             "blinkstick": {
-                "action" : "pulse",
-                "color" : [0, 0, 255, 100]
+                "action": "pulse",
+                "color": [0, 0, 255, 100]
             },
             "yeelight": {}
         },
         {
             "key_comb": "w",
             "blinkstick": {
-                "action" : "pulse",
-                "color" : [255, 0, 0, 100]
+                "action": "pulse",
+                "color": [255, 0, 0, 100]
             },
             "yeelight": {}
         },
@@ -50,9 +49,9 @@
             "yeelight": {}
         }
     ],
-    "settings":{
-        "HOST":"192.168.178.50",
-        "PORT":8081,
-        "b-time":0.5
+    "settings": {
+        "HOST": "192.168.178.28",
+        "PORT": 8081,
+        "b-time": 0.5
     }
 }

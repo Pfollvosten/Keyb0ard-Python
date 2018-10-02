@@ -2,5 +2,8 @@
 
 from ClientSocket import ClientSocket
 sock = ClientSocket()
-sock.start()
-sock.setName("t_sock")
+
+from GPIOReader import GPIOReader
+gpio = GPIOReader()
+gpio.setName("t_gpio")
+gpio.start()

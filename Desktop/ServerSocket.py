@@ -18,22 +18,26 @@ class ServerSocket(Thread):
     def run(self):
         try:
             # listen for and accept 1 incoming connection
-            self.sock.listen(1)
-            print("Waiting for connection...")
-            conn, addr = self.sock.accept()
-            print ('Connected by', addr)
             while True:
+                self.sock.listen(1)
+                print("Waiting for connection...")
+                conn, addr = self.sock.accept()
+                print ('Connected by', addr)
                 #receive the data and unpickle it
                 data_binary = conn.recv(1024)
                 data_variable = pickle.loads(data_binary)
-                # print ('Data received from client. Data is: \n', data_variable)
                 # analyze and execute
-                for id in range(len(data_variable)):
-                    if data_variable[id]:
-                        from KeyboardController import execute_key
-                        execute_key(id)
+                self.analyze_data(data_variable)
+                conn.close()
         except:
             print("Server Error")
         finally:
-            print("Server shutdown")
             conn.close()
+            print("Server shutdown")
+
+    def analyze_data(self , data):
+        for id in range(len(data)):
+            if data[id]:
+                from KeyboardController import execute_key
+                execute_key(id)
+                
