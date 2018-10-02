@@ -22,11 +22,12 @@ def read_keys():
             if b[2] == 0:
                 b[1] = True
             elif b[1]:
+                print("blocking....")
                 b[1] = False
                 b[2] += 1
                 if b[2] >= 30:
+                    ("more than 300ms")
                     b[1] = True
-                    print("again after block")
         else:
             b[1] = False
             b[2] = 0
