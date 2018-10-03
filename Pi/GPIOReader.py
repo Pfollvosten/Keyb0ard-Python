@@ -22,36 +22,24 @@ class GPIOReader(Thread):
         """
         scanning every button - 100x/s
         """
-        sleep(0.01)
+        from ClientSocket import send_data
+        
+        while True:
+            sleep(0.01)
 
-        for b in self.buttons:
-            # send out 1 stroke then block it for 300ms
-            if b[0].is_pressed:
-                if b[2] == 0 and not b[1]:
-                    b[1] = True
+            for b in self.buttons:
+                # send out 1 stroke then block it for 300ms
+                if b[0].is_pressed:
+                    if b[2] == 0 and not b[1]:
+                        b[1] = True
+                    else:
+                        b[1] = False
+                        b[2] += 1
+                        if b[2] >= 30:
+                            b[1] = True
                 else:
                     b[1] = False
-                    b[2] += 1
-                    if b[2] >= 30:
-                        b[1] = True
-            else:
-                b[1] = False
-                b[2] = 0
-                
-        # return pressed state for every button as a list  
-        from ClientSocket import send_data   
-        send_data([bu[1] for bu in self.buttons])
-
-
-# def decor(func):
-    # def wrap(yeet):
-        # print("============")
-        # func(yeet)
-        # print("============")
-    # return wrap
-
-# @decor
-# def print_text(yeet):
-    # print("Hello world!" , yeet)
-
-# print_text(list(["ye" , "eee" , "eet"]))
+                    b[2] = 0
+                    
+            # return pressed state for every button as a list  
+            send_data([bu[1] for bu in self.buttons])
