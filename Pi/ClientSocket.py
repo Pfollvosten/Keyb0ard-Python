@@ -9,10 +9,12 @@ class ClientSocket:
     HOST = '192.168.178.28'
     PORT = 50007
 
-    def run_as_thread(self , func , data):
-        t = Thread(self, target=func , args=data)
-        t.setName("t_client_send")
-        t.start()
+    def run_as_thread(self, func):
+        def wrap(data):
+            t = Thread(self, target=func , args=data)
+            t.setName("t_client_send")
+            t.start()
+        return wrap
 
     @run_as_thread
     def send_data(self , data):
