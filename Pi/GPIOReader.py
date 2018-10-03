@@ -39,5 +39,5 @@ class GPIOReader(Thread):
                 b[2] = 0
                 
         # return pressed state for every button as a list  
-        from MainClient import sock          
-        sock.send_data(list([bu[1] for bu in self.buttons]))
+        from ClientSocket import send_data   
+        send_data(list([bu[1] for bu in self.buttons]))
