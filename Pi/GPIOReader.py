@@ -41,3 +41,17 @@ class GPIOReader(Thread):
         # return pressed state for every button as a list  
         from ClientSocket import send_data   
         send_data([bu[1] for bu in self.buttons])
+
+
+# def decor(func):
+    # def wrap(yeet):
+        # print("============")
+        # func(yeet)
+        # print("============")
+    # return wrap
+
+# @decor
+# def print_text(yeet):
+    # print("Hello world!" , yeet)
+
+# print_text(list(["ye" , "eee" , "eet"]))

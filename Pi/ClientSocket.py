@@ -14,7 +14,13 @@ def run_as_thread(func):
         t.start()
     return wrap
 
-@run_as_thread
+def run_in_thread(fn):
+    def run(*k, **kw):
+        t = Thread(target=fn, args=k, kwargs=kw)
+        t.start()
+    return run
+
+@run_in_thread
 def send_data(data):
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
