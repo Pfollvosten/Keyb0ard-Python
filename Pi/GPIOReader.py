@@ -35,7 +35,7 @@ class GPIOReader(Thread):
                     else:
                         b[1] = False
                         b[2] += 1
-                        if b[2] >= 30:
+                        if b[2] >= 50:
                             b[1] = True
                 else:
                     b[1] = False
