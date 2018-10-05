@@ -20,9 +20,7 @@ class ServerSocket(Thread):
             # listen for and accept 1 incoming connection
             while True:
                 self.sock.listen(1)
-                print("Waiting for connection...")
                 conn, addr = self.sock.accept()
-                print ('Connected by', addr)
                 #receive the data and unpickle it
                 data_binary = conn.recv(1024)
                 data_variable = pickle.loads(data_binary)

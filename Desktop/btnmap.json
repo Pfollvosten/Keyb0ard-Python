@@ -40,19 +40,29 @@
         },
         {
             "key_comb": "",
-            "blinkstick": {},
+            "blinkstick": {
+                "action": "color",
+                "color": [0 , 255 , 0 , 100]
+            },
             "yeelight": {}
         },
         {
             "key_comb": "",
             "blinkstick": {},
-            "yeelight": {}
+            "yeelight": {
+                "color":[0, 255 , 0]
+            }
         }
     ],
     "settings": {
         "HOST": "192.168.178.28",
         "PORT": 8081,
         "b-time": 0.6,
-        "polling-rate": 100
+        "polling-rate": 100,
+        "active-mods": {
+            "keyboard": true,
+            "blinkstick":true,
+            "yeelight":true
+        }        
     }
 }

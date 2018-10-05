@@ -7,13 +7,6 @@ from time import sleep
 HOST = '192.168.178.28'
 PORT = 50007
 
-def run_as_thread(func):
-    def wrap(data):
-        t = Thread(target=func , args=data)
-        t.setName("t_client_send")
-        t.start()
-    return wrap
-
 def run_in_thread(fn):
     def run(*k, **kw):
         t = Thread(target=fn, args=k, kwargs=kw)
